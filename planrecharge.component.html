@@ -1,0 +1,29 @@
+<app-userprofile></app-userprofile>
+<hr>
+<br>
+<div class="container">
+    <div [hidden]="user" >
+        <b><h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">RECHARGE</h1></b>
+        <div *ngFor="let p of childPosts">
+          <p>[childPosts]="parentForms"</p>
+        </div>
+        <label for="phone">Enter Your Phone Number::</label><br>
+                <input type="text" [(ngModel)]="phoneNumber.country"  class="input" placeholder="1"    maxlength="2" >
+                <input type="text" [(ngModel)]="phoneNumber.area"     class="input" placeholder="123"  maxlength="3" >
+                <input type="text" [(ngModel)]="phoneNumber.prefix"   class="input" placeholder="456"  maxlength="3" >
+                <input type="text" [(ngModel)]="phoneNumber.line"     class="input" placeholder="7890" maxlength="4" >
+        <div id="recaptcha-container"></div>
+        <button (click)="sendLoginCode()" id="OTP">Send OTP</button>
+        <div *ngIf="windowRef.confirmationResult">
+          <hr>
+          <label for="code">Enter your Verification Code Here</label><br>
+          <input type="text" name="code" [(ngModel)]="verificationCode">
+          <button (click)="verifyLoginCode()" id="verify">Verify</button>
+        </div>
+      </div>
+      <div *ngIf="user">
+        You have successfully recharged!
+        RechargeId: {{ user?.uid}}
+      </div>
+    </div>
+    

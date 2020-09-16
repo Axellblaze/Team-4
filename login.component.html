@@ -1,0 +1,32 @@
+<div class="container-fluid">
+<body>
+  <div class="login-container">
+      <form #loginform=ngForm (ngSubmit)="loginUser()" class="login-form">
+        <small class="text-danger">{{msg}}</small>
+        <div class="form-group">
+          <label for="exampleInputEmail1">EmailId</label>
+          <input type="email" class="form-control rounded-pill form-control-lg"  name="email" [(ngModel)]="user.emailId" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-z]{2,3}$" #email="ngModel"[class.is-invalid]="email.invalid  && email.touched">
+          <!-- <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email Id is required</small> -->
+          <small id="UserHelp" class="text-muted" [class.d-none]="email.touched">We'll never share your username with anyone else.</small>
+          <div *ngIf="email.errors && (email.invalid && email.touched)">
+            <small class="text-danger" *ngIf="email.errors.required">Email Id is required</small>
+            <small class="text-danger"*ngIf="email.errors.pattern">Entered EmailId is Invalid</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control rounded-pill form-control-lg" name="password"[(ngModel)]="user.password" required pattern=".{8,20}"#password="ngModel" [class.is-invalid]="password.invalid  && password.touched">
+          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>
+          <div *ngIf="password.errors && password.invalid">
+            <small class="text-danger" *ngIf="password.errors.pattern">Password length must be between 8-20</small>
+          </div>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" name="Remember">Remember Me</label>
+        </div>
+        <button [disabled]="loginform.form.invalid" type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">Login</button>&nbsp;
+        <button type="click" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase"(click)="gotoregistration()">Registration</button>
+      </form>
+</div>
+</body>
+</div>
